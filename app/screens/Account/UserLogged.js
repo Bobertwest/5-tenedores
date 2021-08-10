@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-function Account() {
+function UserLogged() {
   return (
     <View>
-      <Text>Account...</Text>
+      <Text>UserLogged...</Text>
     </View>
   );
 }
 
-export default Account;
+export default UserLogged;
