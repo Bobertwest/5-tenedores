@@ -49,8 +49,10 @@ function Navigation() {
           tabBarActiveTintColor: "#00a680",
           tabBarStyle: [
             {
-              paddingBottom: "5%",
-              height: "8%",
+              paddingLeft: 5,
+              paddingRight: 5,
+              paddingBottom: 10,
+              height: 60,
             },
           ],
         })}>
