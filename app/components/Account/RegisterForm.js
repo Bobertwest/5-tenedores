@@ -1,10 +1,17 @@
-import { isEmpty, size } from "lodash";
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { isEmpty, size } from "lodash";
+import Loading from "../Loading";
 import { Input, Button, Icon } from "react-native-elements";
+import { auth } from "../../utils/firebase";
 import { validateEmail } from "../../utils/validations";
 
-function RegisterForm() {
+function RegisterForm(props) {
+  const { toastRef } = props;
+
+  const navigation = useNavigation();
+  const [creatingAccount, setCreatingAccount] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [showRepeatPassword, setShowRepeatPassword] = useState(true);
   const [formData, setFormData] = useState(defaultFormValues());
@@ -15,15 +22,27 @@ function RegisterForm() {
       isEmpty(formData.password) ||
       isEmpty(formData.repeatPassword)
     ) {
-      console.log("Todos los campos son requeridos");
+      toastRef.current.show("Todos los campos son requeridos");
     } else if (!validateEmail(formData.email)) {
-      console.log("Correo no valido");
+      toastRef.current.show("Correo no valido");
     } else if (formData.password !== formData.repeatPassword) {
-      console.log("Las contraseñas no coinciden");
+      toastRef.current.show("Las contraseñas no coinciden");
     } else if (size(formData.password) < 6) {
-      console.log("La contraseña tiene que tener al menos 6 caracteres");
+      toastRef.current.show(
+        "La contraseña tiene que tener al menos 6 caracteres"
+      );
     } else {
-      console.log("Todo OK!!");
+      setCreatingAccount(true);
+      auth
+        .createUserWithEmailAndPassword(formData.email, formData.password)
+        .then((response) => {
+          setCreatingAccount(false);
+          navigation.navigate("account");
+        })
+        .catch((error) => {
+          setCreatingAccount(false);
+          toastRef.current.show("ha ocurrido un error");
+        });
     }
   };
 
@@ -56,7 +75,7 @@ function RegisterForm() {
       <Input
         placeholder="Contraseña"
         containerStyle={styles.inputForm}
-        password={showPassword}
+        password={true}
         secureTextEntry={showPassword}
         onChange={(e) => onChange(e, "password")}
         rightIcon={
@@ -71,7 +90,7 @@ function RegisterForm() {
       <Input
         placeholder="Repetir contraseña"
         containerStyle={styles.inputForm}
-        password={showRepeatPassword}
+        password={true}
         secureTextEntry={showRepeatPassword}
         onChange={(e) => onChange(e, "repeatPassword")}
         rightIcon={
@@ -89,6 +108,7 @@ function RegisterForm() {
         buttonStyle={styles.btnRegister}
         onPress={onSubmit}
       />
+      <Loading isVisible={creatingAccount} text="Creando cuenta..." />
     </View>
   );
 }
