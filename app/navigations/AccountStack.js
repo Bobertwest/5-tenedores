@@ -4,7 +4,7 @@ import Account from "../screens/Account/Account";
 import Login from "../screens/Account/Login";
 import Register from "../screens/Account/Register";
 
-function AccountStack() {
+export default function AccountStack() {
   const Stack = createStackNavigator();
 
   return (
@@ -27,5 +27,3 @@ function AccountStack() {
     </Stack.Navigator>
   );
 }
-
-export default AccountStack;

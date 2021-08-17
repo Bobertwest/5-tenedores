@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import TopRestaurants from "../screens/TopRestaurants";
 
-function TopRestaurantsStack() {
+export default function TopRestaurantsStack() {
   const Stack = createStackNavigator();
 
   return (
@@ -15,5 +15,3 @@ function TopRestaurantsStack() {
     </Stack.Navigator>
   );
 }
-
-export default TopRestaurantsStack;

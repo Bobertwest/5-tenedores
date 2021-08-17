@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Favorites from "../screens/Favorites";
 
-function FavoriteStack() {
+export default function FavoriteStack() {
   const Stack = createStackNavigator();
 
   return (
@@ -15,5 +15,3 @@ function FavoriteStack() {
     </Stack.Navigator>
   );
 }
-
-export default FavoriteStack;

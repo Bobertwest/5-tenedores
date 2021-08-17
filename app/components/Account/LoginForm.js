@@ -7,7 +7,7 @@ import { validateEmail } from "../../utils/validations";
 import Loading from "../Loading";
 import { useNavigation } from "@react-navigation/native";
 
-function LoginForm(props) {
+export default function LoginForm(props) {
   const { toastRef } = props;
   const navigation = useNavigation();
   const [formData, setFormData] = useState(defaultFormValue());
@@ -100,8 +100,6 @@ function LoginForm(props) {
     </View>
   );
 }
-
-export default LoginForm;
 
 function defaultFormValue() {
   return {

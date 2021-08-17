@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, View, ScrollView, Text, Image } from "react-native";
 import { Button } from "react-native-elements";
 
-function UserGuest() {
+export default function UserGuest() {
   const navigation = useNavigation();
 
   return (
@@ -30,8 +30,6 @@ function UserGuest() {
     </ScrollView>
   );
 }
-
-export default UserGuest;
 
 const styles = StyleSheet.create({
   viewBody: {

@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Search from "../screens/Search";
 
-function SearchStack() {
+export default function SearchStack() {
   const Stack = createStackNavigator();
 
   return (
@@ -15,5 +15,3 @@ function SearchStack() {
     </Stack.Navigator>
   );
 }
-
-export default SearchStack;

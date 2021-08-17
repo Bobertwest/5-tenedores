@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Restaurants from "../screens/Restaurants";
 
-function RestaurantsStack() {
+export default function RestaurantsStack() {
   const Stack = createStackNavigator();
 
   return (
@@ -20,5 +20,3 @@ function RestaurantsStack() {
     </Stack.Navigator>
   );
 }
-
-export default RestaurantsStack;

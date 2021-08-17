@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview"
 import Toast from "react-native-easy-toast";
 import RegisterForm from "../../components/Account/RegisterForm";
 
-function Register() {
+export default function Register() {
   const toastRef = useRef();
 
   return (
@@ -23,8 +23,6 @@ function Register() {
     </View>
   );
 }
-
-export default Register;
 
 const styles = StyleSheet.create({
   logo: {

@@ -7,7 +7,7 @@ import { Input, Button, Icon } from "react-native-elements";
 import { auth } from "../../utils/firebase";
 import { validateEmail } from "../../utils/validations";
 
-function RegisterForm(props) {
+export default function RegisterForm(props) {
   const { toastRef } = props;
 
   const navigation = useNavigation();
@@ -112,8 +112,6 @@ function RegisterForm(props) {
     </View>
   );
 }
-
-export default RegisterForm;
 
 const styles = StyleSheet.create({
   formContainer: {

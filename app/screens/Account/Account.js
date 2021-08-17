@@ -4,7 +4,7 @@ import UserGuest from "./UserGuest";
 import Loading from "../../components/Loading";
 import { auth } from "../../utils/firebase";
 
-function Account() {
+export default function Account() {
   const [login, setLogin] = useState(null);
 
   useEffect(() => {
@@ -17,5 +17,3 @@ function Account() {
 
   return login ? <UserLogged /> : <UserGuest />;
 }
-
-export default Account;

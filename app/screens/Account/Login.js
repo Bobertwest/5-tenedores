@@ -5,7 +5,7 @@ import Toast from "react-native-easy-toast";
 import { Divider } from "react-native-elements";
 import LoginForm from "../../components/Account/LoginForm";
 
-function Login() {
+export default function Login() {
   const toastRef = useRef();
 
   return (
@@ -30,8 +30,6 @@ function Login() {
     </ScrollView>
   );
 }
-
-export default Login;
 
 function CreateAccount() {
   const navigation = useNavigation();

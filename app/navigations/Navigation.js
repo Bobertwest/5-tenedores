@@ -8,7 +8,7 @@ import TopRestaurantsStack from "./TopRestaurantsStack";
 import AccountStack from "./AccountStack";
 import RestaurantsStack from "./RestaurantsStack";
 
-function Navigation() {
+export default function Navigation() {
   const Tab = createBottomTabNavigator();
 
   const screenOptions = (route, color) => {
@@ -85,5 +85,3 @@ function Navigation() {
     </NavigationContainer>
   );
 }
-
-export default Navigation;
