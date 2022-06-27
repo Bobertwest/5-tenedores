@@ -29,7 +29,10 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions": ["CAMERA_ROLL"]
+      "permissions": [
+        "CAMERA_ROLL"
+      ],
+      "package": "host.expo.me"
     },
     "web": {
       "favicon": "./assets/favicon.png"

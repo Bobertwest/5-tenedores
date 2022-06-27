@@ -9,7 +9,7 @@ import {
 import Toast from "react-native-easy-toast";
 import Loading from "../../components/Loading";
 import { Button } from "react-native-elements";
-import { auth } from "../../utils/firebase";
+import { auth, storage } from "../../utils/firebase";
 import InfoUser from "../../components/Account/InfoUser";
 import { useNavigation } from "@react-navigation/native";
 import AccountOptions from "../../components/Account/AccountOptions";
@@ -20,22 +20,22 @@ export default function UserLogged() {
   const [loadingText, setLoadingText] = useState("");
   const [userInfo, setUserInfo] = useState(null);
   const [reloadUser, setReloadUser] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [updateControl, setUpdateControl] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const user = auth.currentUser;
-      setUserInfo(user);
-    })();
-    setReloadUser(false);
-    setRefreshing(false);
-  }, [reloadUser]);
-
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    setReloadUser(true);
+    getUser();
   }, []);
+
+  const getUser = async () => {
+    const user = auth.currentUser;
+    setUserInfo(user);
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setUpdateControl(!updateControl);
+  };
 
   return (
     <ScrollView
@@ -43,7 +43,14 @@ export default function UserLogged() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
       <View style={styles.viewUserInfo}>
-        {userInfo && <InfoUser userInfo={userInfo} toastRef={toastRef} />}
+        {userInfo && (
+          <InfoUser
+            userInfo={userInfo}
+            toastRef={toastRef}
+            updateControl={updateControl}
+            setRefreshing={setRefreshing}
+          />
+        )}
         <AccountOptions
           userInfo={userInfo}
           toastRef={toastRef}

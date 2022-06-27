@@ -6,12 +6,19 @@ import * as ImagePicker from "expo-image-picker";
 import { Camera } from "expo-camera";
 import { auth, storage } from "../../utils/firebase";
 import Loading from "../Loading";
+import { useEffect } from "react";
 
 export default function InfoUser(props) {
   const {
     userInfo: { uid, photoURL, displayName, email },
     toastRef,
+    updateControl,
+    setRefreshing,
   } = props;
+
+  useEffect(() => {
+    updatePhoto();
+  }, [updateControl]);
 
   const [loading, setLoading] = useState(false);
 
@@ -58,6 +65,7 @@ export default function InfoUser(props) {
           photoURL: response,
         };
         await auth.currentUser.updateProfile(update);
+        setRefreshing(false);
         setLoading(false);
         toastRef.current.show("Imagen subida");
       })
@@ -81,9 +89,7 @@ export default function InfoUser(props) {
         />
       </Avatar>
       <View>
-        <Text style={styles.displayName}>
-          {displayName ? displayName : "Anónimo"}
-        </Text>
+        <Text style={styles.name}>{displayName ? displayName : "Anónimo"}</Text>
         <Text>{email ? email : "Social media"}</Text>
       </View>
       <Loading isVisible={loading} text="Actualizando avatar" />
@@ -112,8 +118,9 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 12,
   },
-  displayName: {
+  name: {
     fontWeight: "bold",
     paddingBottom: 5,
+    fontSize: 18,
   },
 });
